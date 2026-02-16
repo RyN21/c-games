@@ -30,7 +30,7 @@ typedef struct {
   Direction dir;
   Direction last_dir;
   int move_counter;
-  Point body[MAX_LENGTH - 1];
+  Point body[MAX_LENGTH];
 } Snake;
 
 typedef struct {
@@ -133,12 +133,19 @@ void render(Game* game) {
   }
 }
 
+// void shift_snake_body_coords(Game* game) {
+//   int i = game->snake.length;
+//   game->snake.body[0] = game->snake.head;
+//   while (i > 0) {
+//     game->snake.body[i] = game->snake.body[i - 1];
+//     i--;
+//   }
+// }
+
 void shift_snake_body_coords(Game* game) {
-  int i = game->snake.length;
   game->snake.body[0] = game->snake.head;
-  while (i > 0) {
-    game->snake.body[i] = game->snake.body[i - 1];
-    i--;
+  for (int i = game->snake.length; i > 0; i--) {
+    game->snake.body[i] = game->snake.body[i -1];
   }
 }
 
